@@ -44,6 +44,7 @@ async def number_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data.clear()
         # মেইন মেনু বাটনগুলো (উদাহরণস্বরূপ এখানে দেওয়া হলো)
         main_btns = [
+            ["📱 NUMBERS"],
             ["📲 OTP MANAGER", "📧 EMAIL TOOL"],
             ["📞 NUMBER TOOL", "🔁 REPEAT TOOL"],
             ["ℹ️ HELP"]
