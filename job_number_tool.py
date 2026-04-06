@@ -204,6 +204,6 @@ async def job_number_handler(update: Update, context: ContextTypes.DEFAULT_TYPE)
     # BACK লজিক
     if text == "🔙 BACK":
         context.user_data.clear()
-        home_btns = [["📲 OTP MANAGER", "📧 EMAIL TOOL"], ["📞 NUMBER TOOL", "🔁 REPEAT TOOL"], ["ℹ️ HELP"]]
+        home_btns = [["📲 OTP MANAGER", "📧 EMAIL TOOL"], ["📞 NUMBER TOOL", "🔁 REPEAT TOOL"],["🔍 SEARCH COUNTRY"], ["ℹ️ HELP"]]
         back_msg = '<tg-emoji emoji-id="5260433458324322750">🔙</tg-emoji> <b>Back to Main Menu</b>'
         return await update.message.reply_text(back_msg, parse_mode="HTML", reply_markup=get_job_keyboard(home_btns))
