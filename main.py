@@ -40,9 +40,9 @@ def get_blue_keyboard(buttons):
 
 # ===== MAIN MENU =====
 MAIN_MENU = [
+    ["📱 NUMBERS"],
     ["📲 OTP MANAGER", "📧 EMAIL TOOL"],
     ["📞 NUMBER TOOL", "🔁 REPEAT TOOL"],
-    ["📱 NUMBERS"],
     ["ℹ️ HELP"]
 ]
 
