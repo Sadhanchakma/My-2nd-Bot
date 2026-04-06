@@ -43,9 +43,10 @@ async def email_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if text == "BACK":
         context.user_data.clear()
         main_menu_btns = [
+            ["📱 NUMBERS"],
             ["📲 OTP MANAGER", "📧 EMAIL TOOL"],
             ["📞 NUMBER TOOL", "🔁 REPEAT TOOL"],
-            ["📱 NUMBERS"],
+            
             ["ℹ️ HELP"]
         ]
         return await update.message.reply_text(
