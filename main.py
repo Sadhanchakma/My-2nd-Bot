@@ -6,44 +6,43 @@ from otp_manager import otp_handler
 from email_tool import email_handler
 from number_tool import number_handler
 from repeat_tool import repeat_handler
+# নতুন টুল ইম্পোর্ট
+from country_tool import country_search_handler 
+
 try:
     from job_number_tool import job_number_handler
 except ImportError:
     job_number_handler = None
 
 # ✅ TOKEN
-TOKEN = "8658364991:AAEYny80WCZh3lgf0JMFpYhcxdiO0tE31so"
+TOKEN = "8429601044:AAFZjm6PIt7DGnQSw9hRaknA0-FD31KhVNQ"
 
 # ✅ 🔵 BULLETPROOF BLUE KEYBOARD SYSTEM
 def get_blue_keyboard(buttons):
-    """রেলওয়ে এবং সব হোস্টিংয়ে ব্লু বাটন নিশ্চিত করার জন্য আপডেট করা ফাংশন"""
     try:
-        # লেটেস্ট ভার্সনে ব্লু স্টাইল ইমপোর্ট করা
         from telegram.constants import KeyboardButtonStyle
         PRIMARY_STYLE = KeyboardButtonStyle.PRIMARY
     except (ImportError, AttributeError):
-        # যদি লাইব্রেরি পুরনো হয় তবে স্টাইল বাদ রাখা
         PRIMARY_STYLE = None
 
     blue_keyboard = []
     for row in buttons:
         if PRIMARY_STYLE:
-            # স্টাইল থাকলে ব্লু বাটন তৈরি
             blue_row = [KeyboardButton(text=str(text), style=PRIMARY_STYLE) for text in row]
         else:
-            # না থাকলে রেগুলার বাটন
             blue_row = [KeyboardButton(text=str(text)) for text in row]
         blue_keyboard.append(blue_row)
     
     return ReplyKeyboardMarkup(blue_keyboard, resize_keyboard=True)
 
 
-# ===== MAIN MENU =====
+# ===== MAIN MENU (এখানে নতুন বাটন যোগ করা হয়েছে) =====
 MAIN_MENU = [
     ["📱 NUMBERS"],
     ["📲 OTP MANAGER", "📧 EMAIL TOOL"],
     ["📞 NUMBER TOOL", "🔁 REPEAT TOOL"],
-    ["ℹ️ HELP"]
+    ["🔍 SEARCH COUNTRY"], 
+    ["ℹ️ HELP"] # নতুন বাটন যুক্ত
 ]
 
 
@@ -78,6 +77,7 @@ async def router(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
 
     text = update.message.text if update.message and update.message.text else None
+    mode = context.user_data.get("mode")
 
     # ===== HELP =====
     if text == "ℹ️ HELP":
@@ -121,17 +121,18 @@ async def router(update: Update, context: ContextTypes.DEFAULT_TYPE):
         else:
             return await update.message.reply_text("❌ Job Tool missing!")
 
+    # ===== NEW: SEARCH COUNTRY ROUTING =====
+    if text == "🔍 SEARCH COUNTRY" or mode == "search_country":
+        return await country_search_handler(update, context)
+
     # ===== FILE HANDLING =====
     if update.message and update.message.document:
-        mode = context.user_data.get("mode")
         if mode == "job_number" and job_number_handler:
             return await job_number_handler(update, context)
         else:
             return await otp_handler(update, context)
 
     # ===== MODE CALLBACKS =====
-    mode = context.user_data.get("mode")
-
     if mode == "otp":
         await otp_handler(update, context)
     elif mode == "email":
