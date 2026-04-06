@@ -46,7 +46,7 @@ async def email_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             ["📱 NUMBERS"],
             ["📲 OTP MANAGER", "📧 EMAIL TOOL"],
             ["📞 NUMBER TOOL", "🔁 REPEAT TOOL"],
-            
+            ["🔍 SEARCH COUNTRY"],
             ["ℹ️ HELP"]
         ]
         return await update.message.reply_text(
