@@ -42,7 +42,7 @@ async def repeat_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # ===== BACK =====
     if text == "🔙 BACK":
         context.user_data.clear()
-        main_btns = [["📱 NUMBERS"],["📲 OTP MANAGER", "📧 EMAIL TOOL"], ["📞 NUMBER TOOL", "🔁 REPEAT TOOL"], ["ℹ️ HELP"]]
+        main_btns = [["📱 NUMBERS"],["📲 OTP MANAGER", "📧 EMAIL TOOL"], ["📞 NUMBER TOOL", "🔁 REPEAT TOOL"],["🔍 SEARCH COUNTRY"], ["ℹ️ HELP"]]
         return await update.message.reply_text(
             '<tg-emoji emoji-id="5260433458324322750">🔙</tg-emoji> <b>Back to Main Menu</b>',
             parse_mode="HTML",
